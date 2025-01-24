@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اللحوم ومشتقاتها</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center fixed; /* رابط الخلفية */
+            background-size: cover; /* تغطية كاملة للخلفية */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.8); /* خلفية شفافة للنص */
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #444;
+        }
+        ul {
+            list-style-type: disc;
+            margin: 10px 0 20px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>اللحوم ومشتقاتها</h1>
+        <label for="meat-products">اختر منتجًا:</label>
+        <select id="meat-products" onchange="showDetails()">
+            <option value="">-- اختر منتجًا --</option>
+            <option value="meat">اللحم الطازج</option>
+            <option value="sausages">النقانق</option>
+            <option value="minced-meat">اللحم المفروم</option>
+        </select>
+        <div id="details" style="margin-top: 20px; display: none;">
+            <h2 id="product-name"></h2>
+            <p><strong>طريقة اقتطاع العينات:</strong> <span id="sampling-method"></span></p>
+            <p><strong>عدد العينات التمثيلية:</strong> <span id="sample-count"></span></p>
+            <p><strong>الاختبارات المطلوبة:</strong></p>
+            <ul id="required-tests"></ul>
+        </div>
+    </div>
+    <script>
+        function showDetails() {
+            const product = document.getElementById("meat-products").value;
+            const detailsDiv = document.getElementById("details");
+            const productName = document.getElementById("product-name");
+            const samplingMethod = document.getElementById("sampling-method");
+            const sampleCount = document.getElementById("sample-count");
+            const requiredTests = document.getElementById("required-tests");
+
+            detailsDiv.style.display = "block";
+
+            switch (product) {
+                case "meat":
+                    productName.textContent = "اللحم الطازج";
+                    samplingMethod.textContent = "تُجمع العينات من أماكن مختلفة في القطعة لضمان التمثيل.";
+                    sampleCount.textContent = "5 عينات لكل دفعة (100 كغ).";
+                    requiredTests.innerHTML = `
+                        <li>اختبار الميكروبات</li>
+                        <li>اختبار الطراوة والجودة</li>
+                        <li>تحليل نسبة الدهون</li>
+                    `;
+                    break;
+                case "sausages":
+                    productName.textContent = "النقانق";
+                    samplingMethod.textContent = "تُؤخذ عينات عشوائية من كل صنف.";
+                    sampleCount.textContent = "6 عينات لكل دفعة إنتاج (50 كغ).";
+                    requiredTests.innerHTML = `
+                        <li>تحليل المضافات الغذائية</li>
+                        <li>اختبار الميكروبات</li>
+                        <li>تحليل نسبة الملح</li>
+                    `;
+                    break;
+                case "minced-meat":
+                    productName.textContent = "اللحم المفروم";
+                    samplingMethod.textContent = "تُجمع العينات من بداية ووسط ونهاية الإنتاج.";
+                    sampleCount.textContent = "4 عينات تمثيلية لكل دفعة (50 كغ).";
+                    requiredTests.innerHTML = `
+                        <li>اختبار الميكروبات</li>
+                        <li>تحليل نسبة البروتين</li>
+                        <li>تحليل نسبة الماء</li>
+                    `;
+                    break;
+                default:
+                    productName.textContent = "";
+                    samplingMethod.textContent = "";
+                    sampleCount.textContent = "";
+                    requiredTests.innerHTML = "";
+                    detailsDiv.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
